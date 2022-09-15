@@ -10,7 +10,7 @@ public class Boss_State : MonoBehaviour
     [SerializeField] Animation bossIdle;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] new ParticleSystem particleSystem;
-
+   
     private void Start()
     {
         spriteRenderer.enabled = false;
@@ -24,9 +24,8 @@ public class Boss_State : MonoBehaviour
         {
             Invoke("EnableParticles", 1.8f);
             Invoke("EnableSprite", 2f);
-            
-            
 
+           
         }
     }
 
@@ -40,6 +39,9 @@ public class Boss_State : MonoBehaviour
     {
         particleSystem.Play();
     }
+
+
+    
 }
 
 
