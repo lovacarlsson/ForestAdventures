@@ -8,7 +8,7 @@ AnimationClip:
   m_PrefabAsset: {fileID: 0}
   m_Name: BossAnimation
   serializedVersion: 6
-  m_Legacy: 1
+  m_Legacy: 0
   m_Compressed: 0
   m_UseHighQualityCurve: 1
   m_RotationCurves: []
@@ -39,8 +39,20 @@ AnimationClip:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
-    genericBindings: []
-    pptrCurveMapping: []
+    genericBindings:
+    - serializedVersion: 2
+      path: 0
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+    pptrCurveMapping:
+    - {fileID: 21300000, guid: 86afbf04432b34e1883a20f99f007881, type: 3}
+    - {fileID: 21300000, guid: 779577e8e1d644b05a51ae570fa9eeff, type: 3}
+    - {fileID: 21300000, guid: 73407bdf15d64405a90f5ea731a2c67c, type: 3}
+    - {fileID: 21300000, guid: 515ce34f88f26422f98fead242d86dac, type: 3}
+    - {fileID: 21300000, guid: 994bb188db7ed4f62bdf8f9a775117dd, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

@@ -35,6 +35,8 @@ public class BackgroundMusic : MonoBehaviour
                 {
 
                     audioSource.clip = battleclip;
+                //spelar ljudet från 15 sekunder in i ljudklippet
+                    audioSource.time = 15f;
 
                     audioSource.Play();
 
