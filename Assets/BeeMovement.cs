@@ -12,10 +12,13 @@ public class BeeMovement : MonoBehaviour
     private bool isAlive = true;
     private float movementDirection = 1f;
     private Animator animator;
+    PlayerMovement Player;
 
     private void Start()
     {
         animator = gameObject.GetComponent<Animator>();
+        Player = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        
     }
 
 
@@ -66,11 +69,15 @@ public class BeeMovement : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
-            print("qwerty");
+            
             isAlive = false;
             gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+            
+            
+            
+            Player.JumpCall();
             //StartCoroutine(StartAnimation(3.0f));
-            Invoke("DestroyEnemy", 0.5f);
+            Invoke("DestroyEnemy", 0.25f);
         }
     }
 

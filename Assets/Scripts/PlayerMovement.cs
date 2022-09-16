@@ -15,10 +15,10 @@ public class PlayerMovement : MonoBehaviour
     // Rigidbody2D referens
     private Rigidbody2D rigidbod;
 
-    //referens till sprite renderer (för att kunna flippa x)
+    //referens till sprite renderer (fï¿½r att kunna flippa x)
     private SpriteRenderer spriteRenderer;
 
-    //Få tag på animatorn som sitter på gameobject
+    //Fï¿½ tag pï¿½ animatorn som sitter pï¿½ gameobject
     private Animator animator;
 
     //Groundcheck referens
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isFalling;
    
 
-    //Boolean för sprite renderer (facing right)?
+    //Boolean fï¿½r sprite renderer (facing right)?
     private bool isfacingLeft = false;
 
     //Velocity
@@ -63,9 +63,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        //spelaren ska börja med hastigheten 1, så vi sedan kan ändra på variabeln movementspeed för pickups
+        //spelaren ska bï¿½rja med hastigheten 1, sï¿½ vi sedan kan ï¿½ndra pï¿½ variabeln movementspeed fï¿½r pickups
         defaultMovementSpeed = movementspeed;
-        //Få tag på komponenten Animator
+        //Fï¿½ tag pï¿½ komponenten Animator
         animator = gameObject.GetComponent<Animator>();
         
         //Rigidbody-mekanik
@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         //Spriterenderer
         spriteRenderer = rigidbod.GetComponent<SpriteRenderer>();
 
-        //Isfacingright är true vid start
+        //Isfacingright ï¿½r true vid start
         isfacingLeft = true;
 
     }
@@ -153,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
           verticalVelocity = rigidbod.velocity.y;
         }
 
-        //Spelaren hoppar bestämt av jumpforce
+        //Spelaren hoppar bestï¿½mt av jumpforce
         calculatedMovement.x = movementspeed * 100f * moveDirection * Time.fixedDeltaTime;
         calculatedMovement.y = verticalVelocity;
         Move(calculatedMovement, isJumpPressed);
@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    private void FlipSpriteDirection() //Funktion för att flippa x
+    private void FlipSpriteDirection() //Funktion fï¿½r att flippa x
     {
         spriteRenderer.flipX = !isfacingLeft;
         isfacingLeft = !isfacingLeft;
@@ -209,6 +209,10 @@ public class PlayerMovement : MonoBehaviour
     {
         movementspeed *= multiplyBy;
 
+    }
+
+    public void JumpCall(){
+        rigidbod.velocity = new Vector2(rigidbod.velocity.x, 10f);
     }
 
 }
