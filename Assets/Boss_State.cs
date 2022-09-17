@@ -18,6 +18,7 @@ public class Boss_State : MonoBehaviour
     public GameObject fireBall;
     private bool canShoot;
     PlayerMovement Player;
+    private Vector3 lastPlayerPosition;
 
     private void Start()
     {
@@ -72,16 +73,26 @@ public class Boss_State : MonoBehaviour
 
     IEnumerator Shoot()
     {
+        
 
         if (spriteRenderer.enabled == true)
         {
-            var r = Random.Range(0f, 2);
+            var r = 1f;
+            if (lastPlayerPosition != player.position)
+            {
+                Random.Range(0f, 2);
+            }
 
             canShoot = false;
             yield return new WaitForSeconds(timeBetweenShots);
             GameObject newFireball = Instantiate(fireBall, shootPos.position, Quaternion.identity);
             newFireball.GetComponent<Rigidbody2D>().velocity = new Vector2(shootSpeed * (-distanceToPlayer * r) * Time.fixedDeltaTime, 0);
+
+            lastPlayerPosition = player.position;
+
             canShoot = true;
+
+
         }
 
 
