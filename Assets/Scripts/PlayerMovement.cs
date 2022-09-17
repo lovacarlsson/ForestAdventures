@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     // Definierar hastigheten
     public float movementspeed = 1f;
     private float defaultMovementSpeed;
+
+    private float defaultJumpForce;
     public float jumpforce = 1f;
     private float moveDirection = 0f;
     private bool isJumpPressed = true;
@@ -65,6 +67,8 @@ public class PlayerMovement : MonoBehaviour
     {
         //spelaren ska b�rja med hastigheten 1, s� vi sedan kan �ndra p� variabeln movementspeed f�r pickups
         defaultMovementSpeed = movementspeed;
+
+        defaultJumpForce = jumpforce;
         //F� tag p� komponenten Animator
         animator = gameObject.GetComponent<Animator>();
         
@@ -213,6 +217,16 @@ public class PlayerMovement : MonoBehaviour
 
     public void JumpCall(){
         rigidbod.velocity = new Vector2(rigidbod.velocity.x, 20f);
+    }
+
+    public void SetNewMovementJump(float multiplyBy){
+        jumpforce *= multiplyBy;
+    }
+
+        public void ResetJumpForce()
+    {
+        jumpforce = defaultJumpForce;
+
     }
 
 }
