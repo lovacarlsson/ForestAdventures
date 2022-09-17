@@ -22,6 +22,7 @@ public class Enemy_AlienMovement : MonoBehaviour
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip enemyDeathClip;
+    [SerializeField] private LayerMask groundLayer;
 
 
 
@@ -71,7 +72,7 @@ public class Enemy_AlienMovement : MonoBehaviour
     {
         isGrounded = false;
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.2f);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.2f, groundLayer);
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject != gameObject)
