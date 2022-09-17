@@ -212,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void JumpCall(){
-        rigidbod.velocity = new Vector2(rigidbod.velocity.x, 10f);
+        rigidbod.velocity = new Vector2(rigidbod.velocity.x, 20f);
     }
 
 }

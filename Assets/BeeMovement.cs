@@ -10,7 +10,6 @@ public class BeeMovement : MonoBehaviour
     public bool beeIsUp;
     public int damage = 1;
     private bool isAlive = true;
-    private float movementDirection = 1f;
     private Animator animator;
     PlayerMovement Player;
 
@@ -72,11 +71,7 @@ public class BeeMovement : MonoBehaviour
             
             isAlive = false;
             gameObject.GetComponent<PolygonCollider2D>().enabled = false;
-            
-            
-            
             Player.JumpCall();
-            //StartCoroutine(StartAnimation(3.0f));
             Invoke("DestroyEnemy", 0.25f);
         }
     }
@@ -87,8 +82,6 @@ public class BeeMovement : MonoBehaviour
 
         Destroy(gameObject);
     }
-    IEnumerator StartAnimation(float timeOut)
-    {
-        yield return new WaitForSeconds(timeOut);
-    }
+
+
 }
