@@ -8,6 +8,7 @@ using System.Security;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
 public class PlayerMovement : MonoBehaviour
@@ -162,12 +163,18 @@ public class PlayerMovement : MonoBehaviour
         //Spelaren hoppar best�mt av jumpforce
         calculatedMovement.x = movementspeed * 100f * moveDirection * Time.fixedDeltaTime;
         if(isLadder()){
-            calculatedMovement.y = movementspeed * 3f * moveDirectionY;
-            print("Detected");
+            rigidbod.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+            animator.SetBool("isClimbing", false);
+            if(moveDirectionY != 0){
+                rigidbod.constraints = RigidbodyConstraints2D.FreezeRotation;
+                calculatedMovement.y = movementspeed * 5f * moveDirectionY;
+                animator.SetBool("isClimbing", true);
+            }
         }
         else{
             calculatedMovement.y = verticalVelocity;
-            print("Lost");
+            animator.SetBool("isClimbing", false);
+            rigidbod.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
         Move(calculatedMovement, isJumpPressed);
         isJumpPressed = false;
