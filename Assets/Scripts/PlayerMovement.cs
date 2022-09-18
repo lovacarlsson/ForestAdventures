@@ -31,13 +31,14 @@ public class PlayerMovement : MonoBehaviour
     private float defaultJumpForce;
     public float jumpforce = 1f;
     private float moveDirection = 0f;
+    private float moveDirectionY = 0f;
     private bool isJumpPressed = true;
 
     //isgrounded?
     private bool isGrounded;
 
 
-
+    public Transform ladder;
 
     //ishurt?
 
@@ -58,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
     public TrailRenderer trail;
 
     [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private LayerMask ladderLayer;
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip jumpClip;
@@ -111,8 +113,7 @@ public class PlayerMovement : MonoBehaviour
 
     {
 
-
-
+        moveDirectionY = Input.GetAxis("Vertical");
         moveDirection = Input.GetAxis("Horizontal");
         if (Input.GetKeyDown(KeyCode.Space) == true)
         {
@@ -141,6 +142,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         isGrounded = false;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.2f, whatIsGround);
         for (int i = 0; i < colliders.Length; i++)
@@ -159,7 +161,14 @@ public class PlayerMovement : MonoBehaviour
 
         //Spelaren hoppar best�mt av jumpforce
         calculatedMovement.x = movementspeed * 100f * moveDirection * Time.fixedDeltaTime;
-        calculatedMovement.y = verticalVelocity;
+        if(isLadder()){
+            calculatedMovement.y = movementspeed * 3f * moveDirectionY;
+            print("Detected");
+        }
+        else{
+            calculatedMovement.y = verticalVelocity;
+            print("Lost");
+        }
         Move(calculatedMovement, isJumpPressed);
         isJumpPressed = false;
     }
@@ -197,6 +206,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private bool isLadder(){
+        return Physics2D.OverlapCircle(groundCheck.transform.position, 0.1f, ladderLayer);
+    }
 
     public void TakingDamageAnimation()
     {
