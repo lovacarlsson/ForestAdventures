@@ -165,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
         if(isLadder()){
             rigidbod.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
             animator.SetBool("isClimbing", false);
-            if(moveDirectionY != 0){
+            if(moveDirectionY != 0f){
                 rigidbod.constraints = RigidbodyConstraints2D.FreezeRotation;
                 calculatedMovement.y = movementspeed * 5f * moveDirectionY;
                 animator.SetBool("isClimbing", true);
