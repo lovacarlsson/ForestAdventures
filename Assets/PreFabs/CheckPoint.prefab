@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CheckPointTaken: {fileID: 21300000, guid: 64f86a54aedf140e9b24babbac319617, type: 3}
+  audioSource: {fileID: 0}
+  checkpointClip: {fileID: 0}
 --- !u!61 &3449122998181020063
 BoxCollider2D:
   m_ObjectHideFlags: 0
