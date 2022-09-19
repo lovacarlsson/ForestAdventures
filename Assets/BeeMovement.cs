@@ -10,7 +10,6 @@ public class BeeMovement : MonoBehaviour
     public bool beeIsUp;
     public int damage = 1;
     private bool isAlive = true;
-    private float movementDirection = 1f;
     private Animator animator;
     PlayerMovement Player;
 
