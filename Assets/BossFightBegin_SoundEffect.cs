@@ -12,16 +12,21 @@ public class BossFightBegin_SoundEffect : MonoBehaviour
     [SerializeField] private AudioClip growingClip;
     [SerializeField] private TrailRenderer trailRenderer;
     [SerializeField] public bool spawnBoss = false;
+    bool HasBeenTriggered = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") == true)
         {
-           
-            audioSource.PlayOneShot(screechClip);
-            audioSource.PlayOneShot(explosionClip);
+           if (HasBeenTriggered == false)
+            {
+                audioSource.PlayOneShot(screechClip);
+                audioSource.PlayOneShot(explosionClip);
 
-            Invoke("PlayGrowingClip", 2f);
+                Invoke("PlayGrowingClip", 2f);
+                HasBeenTriggered = true;
+            }
+      
            
         }
 

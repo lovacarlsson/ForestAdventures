@@ -11,6 +11,7 @@ public class Boss_State : MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] new ParticleSystem particleSystem;
     [SerializeField] AudioClip deathclip;
+    [SerializeField] AudioClip deatheffect;
     [SerializeField] AudioSource audioSource;
     public float timeBetweenShots = 2;
     public Transform player, shootPos;
@@ -19,15 +20,22 @@ public class Boss_State : MonoBehaviour
     public GameObject fireBall;
     private bool canShoot;
     PlayerMovement Player;
+    PlayBossMusicTrigger BossEntrance;
+    BossSpawnTrigger BossSpawn;
     private Vector3 lastPlayerPosition;
     private int damage = 1;
     bool isDead = false;
+    bool hasMusicPlayed = false;
+
 
     private void Start()
     {
         spriteRenderer.enabled = true;
         canShoot = true;
         Player = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        BossEntrance = GameObject.Find("Music_Bossfight").GetComponent<PlayBossMusicTrigger>();
+        BossSpawn = GameObject.Find("SpawnTrigger").GetComponent<BossSpawnTrigger>();
+
     }
 
 
@@ -47,23 +55,31 @@ public class Boss_State : MonoBehaviour
         if (Player.killedPlant >= 1)
         {
             isDead = true;
-            audioSource.PlayOneShot(deathclip);
-            Invoke("DestroyBoss", 1f);
+            if (hasMusicPlayed == false)
+            {
+                PlayDeathSoundEffects();
+                Invoke("DisableSprite", 0.5f);
+               
+            }
+            BossEntrance.StopMusic();
+            BossSpawn.BossIsDead = true;
+            Invoke("DestroyBoss", 5f);
 
         }
-    }
 
-    /*private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") == true)
+        if (BossSpawn.BossIsDead == false)
         {
             Invoke("EnableParticles", 1.8f);
             Invoke("EnableSprite", 2f);
-
-           
+            BossSpawn.BossIsDead = true;
         }
-    }*/
-   
+    }
+
+    
+    
+
+    
+
     IEnumerator Shoot()
     {
         if (spriteRenderer.enabled == true)
@@ -85,14 +101,7 @@ public class Boss_State : MonoBehaviour
         }
 
     }
-    //Spelaren tar skada när den nuddar blomman
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.CompareTag("Player") == true)
-        {
-            collider.gameObject.GetComponent<PlayerState>().DoHarm(damage);
-        }
-    }
+
 
 
     private void DestroyBoss()
@@ -107,6 +116,17 @@ public class Boss_State : MonoBehaviour
     {
         spriteRenderer.enabled = true;
 
+    }
+    private void DisableSprite()
+    {
+        spriteRenderer.enabled = false;
+
+    }
+    private void PlayDeathSoundEffects()
+    {
+        audioSource.PlayOneShot(deatheffect);
+        audioSource.PlayOneShot(deathclip);
+        hasMusicPlayed = true;
     }
 }
 
