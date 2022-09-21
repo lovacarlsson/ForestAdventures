@@ -12,7 +12,8 @@ public class BeeMovement : MonoBehaviour
     private bool isAlive = true;
     private Animator animator;
     PlayerMovement Player;
-
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip deathclip;
     private void Start()
     {
         animator = gameObject.GetComponent<Animator>();
@@ -71,11 +72,8 @@ public class BeeMovement : MonoBehaviour
             
             isAlive = false;
             gameObject.GetComponent<PolygonCollider2D>().enabled = false;
-            
-            
-            
             Player.JumpCall();
-            //StartCoroutine(StartAnimation(3.0f));
+            audioSource.PlayOneShot(deathclip); 
             Invoke("DestroyEnemy", 0.25f);
         }
     }
@@ -86,8 +84,6 @@ public class BeeMovement : MonoBehaviour
 
         Destroy(gameObject);
     }
-    IEnumerator StartAnimation(float timeOut)
-    {
-        yield return new WaitForSeconds(timeOut);
-    }
+
+
 }
