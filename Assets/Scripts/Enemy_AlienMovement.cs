@@ -11,6 +11,8 @@ public class Enemy_AlienMovement : MonoBehaviour
 
     private Animator animator;
 
+    PlayerMovement Player;
+
 
     bool isGrounded;
 
@@ -20,12 +22,14 @@ public class Enemy_AlienMovement : MonoBehaviour
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip enemyDeathClip;
+    [SerializeField] private LayerMask groundLayer;
 
 
 
 
     void Start()
     {
+        Player = GameObject.Find("Player").GetComponent<PlayerMovement>();
         rigidBod = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
     }
@@ -33,7 +37,7 @@ public class Enemy_AlienMovement : MonoBehaviour
     private void Update()
     {
 
-        //Animationer död/alive
+        //Animationer dï¿½d/alive
         animator.SetBool("IsAlive", isAlive);
         animator.SetBool("IsGrounded", isGrounded);
 
@@ -68,7 +72,7 @@ public class Enemy_AlienMovement : MonoBehaviour
     {
         isGrounded = false;
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.2f);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.2f, groundLayer);
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject != gameObject)
@@ -89,17 +93,14 @@ public class Enemy_AlienMovement : MonoBehaviour
         isAlive = false;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         Vector2 killForce = new Vector2(movementDirection, 4f);
-        //få den att inte falla
+        //fï¿½ den att inte falla
         rigidBod.gravityScale = 0;
-
-        //Detta var tutorialens kod för fallet av slugen, men jag behöver inte denna just nu:
-        //rigidBod.AddForce(killForce, ForceMode2D.Impulse);
-        //gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y);
+        Player.JumpCall();
 
 
         audioSource.PlayOneShot(enemyDeathClip);
 
-        Invoke("DestroyEnemy", 0.5f);
+        Invoke("DestroyEnemy", 0.25f);
           
         
 

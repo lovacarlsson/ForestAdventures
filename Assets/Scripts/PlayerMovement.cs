@@ -8,6 +8,7 @@ using System.Security;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
 public class PlayerMovement : MonoBehaviour
@@ -15,10 +16,10 @@ public class PlayerMovement : MonoBehaviour
     // Rigidbody2D referens
     private Rigidbody2D rigidbod;
 
-    //referens till sprite renderer (för att kunna flippa x)
+    //referens till sprite renderer (fï¿½r att kunna flippa x)
     private SpriteRenderer spriteRenderer;
 
-    //Få tag på animatorn som sitter på gameobject
+    //Fï¿½ tag pï¿½ animatorn som sitter pï¿½ gameobject
     private Animator animator;
 
     //Groundcheck referens
@@ -27,15 +28,18 @@ public class PlayerMovement : MonoBehaviour
     // Definierar hastigheten
     public float movementspeed = 1f;
     private float defaultMovementSpeed;
+
+    private float defaultJumpForce;
     public float jumpforce = 1f;
     private float moveDirection = 0f;
+    private float moveDirectionY = 0f;
     private bool isJumpPressed = true;
 
     //isgrounded?
     private bool isGrounded;
 
 
-
+    public Transform ladder;
 
     //ishurt?
 
@@ -43,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isFalling;
    
 
-    //Boolean för sprite renderer (facing right)?
+    //Boolean fï¿½r sprite renderer (facing right)?
     private bool isfacingLeft = false;
 
     //Velocity
@@ -56,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
     public TrailRenderer trail;
 
     [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private LayerMask ladderLayer;
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip jumpClip;
@@ -63,9 +68,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        //spelaren ska börja med hastigheten 1, så vi sedan kan ändra på variabeln movementspeed för pickups
+        //spelaren ska bï¿½rja med hastigheten 1, sï¿½ vi sedan kan ï¿½ndra pï¿½ variabeln movementspeed fï¿½r pickups
         defaultMovementSpeed = movementspeed;
-        //Få tag på komponenten Animator
+
+        defaultJumpForce = jumpforce;
+        //Fï¿½ tag pï¿½ komponenten Animator
         animator = gameObject.GetComponent<Animator>();
         
         //Rigidbody-mekanik
@@ -74,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
         //Spriterenderer
         spriteRenderer = rigidbod.GetComponent<SpriteRenderer>();
 
-        //Isfacingright är true vid start
+        //Isfacingright ï¿½r true vid start
         isfacingLeft = true;
 
     }
@@ -107,8 +114,7 @@ public class PlayerMovement : MonoBehaviour
 
     {
 
-
-
+        moveDirectionY = Input.GetAxis("Vertical");
         moveDirection = Input.GetAxis("Horizontal");
         if (Input.GetKeyDown(KeyCode.Space) == true)
         {
@@ -137,6 +143,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         isGrounded = false;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.2f, whatIsGround);
         for (int i = 0; i < colliders.Length; i++)
@@ -153,16 +160,29 @@ public class PlayerMovement : MonoBehaviour
           verticalVelocity = rigidbod.velocity.y;
         }
 
-        //Spelaren hoppar bestämt av jumpforce
+        //Spelaren hoppar bestï¿½mt av jumpforce
         calculatedMovement.x = movementspeed * 100f * moveDirection * Time.fixedDeltaTime;
-        calculatedMovement.y = verticalVelocity;
+        if(isLadder()){
+            rigidbod.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+            animator.SetBool("isClimbing", false);
+            if(moveDirectionY != 0f){
+                rigidbod.constraints = RigidbodyConstraints2D.FreezeRotation;
+                calculatedMovement.y = movementspeed * 5f * moveDirectionY;
+                animator.SetBool("isClimbing", true);
+            }
+        }
+        else{
+            calculatedMovement.y = verticalVelocity;
+            animator.SetBool("isClimbing", false);
+            rigidbod.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
         Move(calculatedMovement, isJumpPressed);
         isJumpPressed = false;
     }
 
 
 
-    private void FlipSpriteDirection() //Funktion för att flippa x
+    private void FlipSpriteDirection() //Funktion fï¿½r att flippa x
     {
         spriteRenderer.flipX = !isfacingLeft;
         isfacingLeft = !isfacingLeft;
@@ -193,6 +213,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private bool isLadder(){
+        return Physics2D.OverlapCircle(groundCheck.transform.position, 0.1f, ladderLayer);
+    }
 
     public void TakingDamageAnimation()
     {
@@ -208,6 +231,20 @@ public class PlayerMovement : MonoBehaviour
     public void SetNewMovementSpeed(float multiplyBy)
     {
         movementspeed *= multiplyBy;
+
+    }
+
+    public void JumpCall(){
+        rigidbod.velocity = new Vector2(rigidbod.velocity.x, 20f);
+    }
+
+    public void SetNewMovementJump(float multiplyBy){
+        jumpforce *= multiplyBy;
+    }
+
+        public void ResetJumpForce()
+    {
+        jumpforce = defaultJumpForce;
 
     }
 
