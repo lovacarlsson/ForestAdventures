@@ -6,11 +6,13 @@ public class BossSpawnTrigger : MonoBehaviour
 {
     Boss_State boss;
     public bool BossIsDead = true;
-   
-    private void OnTriggerEnter2D(Collider2D collision)
+ 
+
+    public void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.gameObject.CompareTag("Player") == true)
+        if (collider.gameObject.CompareTag("Player") == true)
         {
+            print("nu triggas partiklarna");
             BossIsDead = false;
         }
     }

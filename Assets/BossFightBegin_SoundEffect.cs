@@ -12,28 +12,19 @@ public class BossFightBegin_SoundEffect : MonoBehaviour
     [SerializeField] private AudioClip growingClip;
     [SerializeField] private TrailRenderer trailRenderer;
     [SerializeField] public bool spawnBoss = false;
-    bool HasBeenTriggered = false;
+    bool hasSoundBeenPlayed;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+  public void BeginSound ()
     {
-        if (collision.CompareTag("Player") == true)
+        if (hasSoundBeenPlayed == false)
         {
-           if (HasBeenTriggered == false)
-            {
-                audioSource.PlayOneShot(screechClip);
-                audioSource.PlayOneShot(explosionClip);
+            audioSource.PlayOneShot(screechClip);
+            audioSource.PlayOneShot(explosionClip);
 
-                Invoke("PlayGrowingClip", 2f);
-                HasBeenTriggered = true;
-            }
-      
-           
+            Invoke("PlayGrowingClip", 2f);
+            hasSoundBeenPlayed = true;
         }
-
-        // TODO:skaka kameran
-
-        
-
+      
     }
 
     private void PlayGrowingClip()
@@ -43,14 +34,19 @@ public class BossFightBegin_SoundEffect : MonoBehaviour
     }
 
 
-    private void SpawnBoss()
+    /* private void SpawnBoss()
     {
-        trailRenderer.enabled = true;
-        Invoke("ShowBossAnimation", 0.5f);
+        
+        //Invoke("ShowBossAnimation", 0.5f);
     }
+    */
 
-  
 }
+
+
+       
+  
+
 
 
 

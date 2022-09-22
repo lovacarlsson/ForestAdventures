@@ -26,21 +26,25 @@ public class Boss_State : MonoBehaviour
     private int damage = 1;
     bool isDead = false;
     bool hasMusicPlayed = false;
-
-
+    ParticleSystem BossAlwaysParticles;
+    bool hasparticlesbeenplayed;
+    BossFightBegin_SoundEffect BossEntranceSound;
     private void Start()
     {
-        spriteRenderer.enabled = true;
+        spriteRenderer.enabled = false;
         canShoot = true;
         Player = GameObject.Find("Player").GetComponent<PlayerMovement>();
         BossEntrance = GameObject.Find("Music_Bossfight").GetComponent<PlayBossMusicTrigger>();
         BossSpawn = GameObject.Find("SpawnTrigger").GetComponent<BossSpawnTrigger>();
-
+        BossSpawn.BossIsDead = true;
+        BossAlwaysParticles = GameObject.Find("BossAlwaysParticles").GetComponent<ParticleSystem>();
+        BossEntranceSound = GameObject.Find("BossFightBeginEffect").GetComponent<BossFightBegin_SoundEffect>();
     }
 
 
     private void Update()
     {
+        print(BossSpawn.BossIsDead);
         animator.SetBool("isDead", isDead);
       distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
@@ -69,10 +73,17 @@ public class Boss_State : MonoBehaviour
 
         if (BossSpawn.BossIsDead == false)
         {
-            Invoke("EnableParticles", 1.8f);
-            Invoke("EnableSprite", 2f);
-            BossSpawn.BossIsDead = true;
+            BossEntranceSound.BeginSound(); //Lägg till battlemusik och partikelexplosion
+            
+            if (hasparticlesbeenplayed == false)
+            {
+                Invoke("EnableSpriteAndAlwaysParticles", 2f);
+                hasparticlesbeenplayed = true;
+            }
+
+
         }
+       
     }
 
     
@@ -112,6 +123,10 @@ public class Boss_State : MonoBehaviour
     {
         particleSystem.Play();
     }
+    private void DisableParticles ()
+    {
+        particleSystem.Stop();
+    }
     private void EnableSprite()
     {
         spriteRenderer.enabled = true;
@@ -127,6 +142,15 @@ public class Boss_State : MonoBehaviour
         audioSource.PlayOneShot(deatheffect);
         audioSource.PlayOneShot(deathclip);
         hasMusicPlayed = true;
+    }
+    private void EnableAlwaysParticles ()
+    {
+        BossAlwaysParticles.Play();
+    }
+    private void EnableSpriteAndAlwaysParticles ()
+    {
+        EnableSprite();
+        EnableAlwaysParticles();
     }
 }
 
