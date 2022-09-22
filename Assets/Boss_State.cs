@@ -58,7 +58,7 @@ public class Boss_State : MonoBehaviour
             }
         }
 
-        if (Player.killedPlant >= 1)
+        if (Player.killedPlant >= 3)
         {
             isDead = true;
             if (hasMusicPlayed == false)
@@ -75,7 +75,7 @@ public class Boss_State : MonoBehaviour
 
         if (BossSpawn.BossIsDead == false)
         {
-            BossEntranceSound.BeginSound(); //Lägg till battlemusik och partikelexplosion
+            BossEntranceSound.BeginSound(); //Lï¿½gg till battlemusik och partikelexplosion
             
             if (hasparticlesbeenplayed == false)
             {

@@ -253,7 +253,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collider.gameObject.tag == "Underling")
         {
-            Destroy(collider.gameObject);
             killedPlant++;
         }
     }
