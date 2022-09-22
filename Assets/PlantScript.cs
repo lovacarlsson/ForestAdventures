@@ -9,12 +9,14 @@ public class PlantScript : MonoBehaviour
     private bool isClose = false;
     private Animator animator;
     PlayerMovement Player;
+    private SpriteRenderer spriteRenderer;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip deathclip;
 
     public Transform player, plant;
 
     private void Start(){
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         animator = gameObject.GetComponent<Animator>();
         Player = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
@@ -27,10 +29,21 @@ public class PlantScript : MonoBehaviour
 
     private void StartAttack(){
         if(Vector2.Distance(player.position, plant.position)<5f){
+
+            if(plant.transform.position.x > player.transform.position.x){
+                spriteRenderer.flipX = false;
+            }
+            else{
+                spriteRenderer.flipX = true;
+            }
+
             isClose = true;
-            gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
-            if(this.animator.GetCurrentAnimatorStateInfo(0).IsName("PlantAttack")){
-               StartCoroutine(Attack(100f)); 
+
+            if(this.animator.GetCurrentAnimatorStateInfo(0).IsName("P_PlantAttack")){
+
+                isClose = false;
+                gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+
             }
         }
         else{
@@ -39,11 +52,10 @@ public class PlantScript : MonoBehaviour
         }
     }
 
-    IEnumerator Attack(float timeOut){
-        gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
-        isClose = false;
-        yield return new WaitForSeconds(timeOut);
+    IEnumerator Wait(){
+        yield return new WaitForSeconds(3);
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player") == true)
@@ -70,7 +82,10 @@ public class PlantScript : MonoBehaviour
 
      private void DestroyEnemy()
     {
-
         Destroy(gameObject);
+    }
+
+    private void DumbAttack(){
+        gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
     }
 }

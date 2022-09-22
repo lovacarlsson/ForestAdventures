@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
    
 
     //Boolean f�r sprite renderer (facing right)?
-    private bool isfacingLeft = false;
+    public bool isfacingLeft = false;
 
     //Velocity
     private Vector3 velocity;

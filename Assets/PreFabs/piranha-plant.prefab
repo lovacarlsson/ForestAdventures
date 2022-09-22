@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5823997515519263307}
   - component: {fileID: 5823997515519263306}
   - component: {fileID: 5823997515519263300}
-  - component: {fileID: 2593327471406766952}
   - component: {fileID: 2007596250}
+  - component: {fileID: 1159844094}
   m_Layer: 0
   m_Name: piranha-plant
   m_TagString: Underling
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.61, y: 0.45}
+  m_Size: {x: 3.8125, y: 2.8125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -223,7 +223,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 3.8125, y: 2.8125}
-    newSize: {x: 0.61, y: 0.45}
+    newSize: {x: 3.8125, y: 2.8125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -231,49 +231,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.208107, y: 0.13771439}
   m_EdgeRadius: 0
---- !u!60 &2593327471406766952
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5823997515519263310}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.8125, y: 2.8125}
-    newSize: {x: 0.61, y: 0.45}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.16893005, y: 0.38632202}
-      - {x: -0.17705536, y: 0.38863373}
-      - {x: -0.31674194, y: 0.35931396}
-      - {x: -0.59646606, y: 0.023937225}
-      - {x: -0.5735855, y: -0.4054222}
-      - {x: -0.051651, y: -0.6867485}
-      - {x: -0.322052, y: -0.96992874}
-      - {x: -0.40200806, y: -1.368988}
-      - {x: 0.41521454, y: -1.3410378}
-      - {x: 0.56170654, y: -0.97013855}
-      - {x: 0.07774353, y: -1.038559}
-      - {x: 0.2883377, y: -0.7576599}
-      - {x: 0.42062378, y: -0.5013504}
-      - {x: 0.46914673, y: -0.26075363}
-      - {x: 0.63360596, y: 0.1561966}
-      - {x: 0.34659576, y: 0.06286621}
-      - {x: 0.34067535, y: 0.4446907}
-      - {x: 0.024291992, y: 0.3313675}
 --- !u!114 &2007596250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,3 +246,21 @@ MonoBehaviour:
   damage: 1
   audioSource: {fileID: 0}
   deathclip: {fileID: 8300000, guid: adfacef3737c9a14d8610dd1675df06a, type: 3}
+  player: {fileID: 0}
+  plant: {fileID: 5823997515519263305}
+--- !u!70 &1159844094
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5823997515519263310}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0065765027, y: -0.30316398}
+  m_Size: {x: 3.634256, y: 1.0467651}
+  m_Direction: 1
