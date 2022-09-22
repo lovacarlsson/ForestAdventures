@@ -10,6 +10,7 @@ public class BossFightBegin_SoundEffect : MonoBehaviour
     [SerializeField] private AudioClip screechClip;
     [SerializeField] private AudioClip explosionClip;
     [SerializeField] private AudioClip growingClip;
+    [SerializeField] private AudioClip battleClip;
     [SerializeField] private TrailRenderer trailRenderer;
     [SerializeField] public bool spawnBoss = false;
     bool hasSoundBeenPlayed;
@@ -20,7 +21,7 @@ public class BossFightBegin_SoundEffect : MonoBehaviour
         {
             audioSource.PlayOneShot(screechClip);
             audioSource.PlayOneShot(explosionClip);
-
+            audioSource.PlayOneShot(battleClip);
             Invoke("PlayGrowingClip", 2f);
             hasSoundBeenPlayed = true;
         }

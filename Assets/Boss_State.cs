@@ -29,6 +29,7 @@ public class Boss_State : MonoBehaviour
     ParticleSystem BossAlwaysParticles;
     bool hasparticlesbeenplayed;
     BossFightBegin_SoundEffect BossEntranceSound;
+    ParticleSystem BossSpawnParticles;
     private void Start()
     {
         spriteRenderer.enabled = false;
@@ -39,6 +40,7 @@ public class Boss_State : MonoBehaviour
         BossSpawn.BossIsDead = true;
         BossAlwaysParticles = GameObject.Find("BossAlwaysParticles").GetComponent<ParticleSystem>();
         BossEntranceSound = GameObject.Find("BossFightBeginEffect").GetComponent<BossFightBegin_SoundEffect>();
+        BossSpawnParticles  = GameObject.Find("BossSpawnParticles").GetComponent<ParticleSystem>();
     }
 
 
@@ -77,7 +79,9 @@ public class Boss_State : MonoBehaviour
             
             if (hasparticlesbeenplayed == false)
             {
+                
                 Invoke("EnableSpriteAndAlwaysParticles", 2f);
+                BossSpawnParticles.Play();
                 hasparticlesbeenplayed = true;
             }
 
