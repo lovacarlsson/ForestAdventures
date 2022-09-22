@@ -683,6 +683,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dea93744e892faf4cbb7d5f3c4640392, type: 3}
+--- !u!1 &389834619 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1111404904330305000, guid: 84a60f0860d9bb6409efeb5e0dd375b4, type: 3}
+  m_PrefabInstance: {fileID: 1111404905329319833}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &441593745 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8063718646763561022, guid: 409acc2e2d5ba9d4fbc1b0301bc32798, type: 3}
@@ -997,8 +1002,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b5d8df3dec5a2408e2054d8bc53fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0, z: -15.76}
-  smoothSpeed: 1
+  player: {fileID: 389834619}
+  timeOffset: 1
+  leftLimit: -7.7
+  rightLimit: 218.6
+  bottomLimit: -39.4
+  topLimit: 15
+  posOffset: {x: 1, y: 1}
 --- !u!1001 &531669996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2406,7 +2416,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1111404904330304993, guid: 84a60f0860d9bb6409efeb5e0dd375b4, type: 3}
   m_PrefabInstance: {fileID: 1111404905329319833}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 389834619}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c27f16948bfb77a4ea78cb47e87d7f36, type: 3}
@@ -3155,6 +3165,7 @@ GameObject:
   - component: {fileID: 1916280675}
   - component: {fileID: 1916280677}
   - component: {fileID: 1916280676}
+  - component: {fileID: 1916280678}
   m_Layer: 0
   m_Name: Lager1
   m_TagString: Untagged
@@ -89320,6 +89331,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &1916280678
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916280674}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1001 &1936564751
 PrefabInstance:
   m_ObjectHideFlags: 0
