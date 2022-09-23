@@ -33,7 +33,8 @@ public class Boss_State : MonoBehaviour
     ParticleSystem BossSpawnParticles;
     bool attack;
     Winningmusic WinningmusicScript;
-
+    ParticleSystem RainEffect;
+    AudioSource RainSound;
     private void Start()
     {
         spriteRenderer.enabled = false;
@@ -46,6 +47,8 @@ public class Boss_State : MonoBehaviour
         BossEntranceSound = GameObject.Find("BossFightBeginEffect").GetComponent<BossFightBegin_SoundEffect>();
         BossSpawnParticles  = GameObject.Find("BossSpawnParticles").GetComponent<ParticleSystem>();
         WinningmusicScript = GameObject.Find("Winningmusic").GetComponent<Winningmusic>();
+        RainEffect = GameObject.Find("RainEffect").GetComponent<ParticleSystem>();
+        RainSound = GameObject.Find("Music_PlayRain").GetComponent<AudioSource>();
     }
 
 
@@ -70,7 +73,10 @@ public class Boss_State : MonoBehaviour
             isDead = true;
             if (hasMusicPlayed == false)
             {
-                BossEntranceSound.StopMusic();  
+                BossAlwaysParticles.Stop();
+                BossEntranceSound.StopMusic();
+                RainEffect.Stop();
+                RainSound.Stop();
                 PlayDeathSoundEffects();
                 Invoke("DisableSprite", 0.5f);
                 WinningmusicScript.PlayMusic();
