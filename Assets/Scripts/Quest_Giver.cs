@@ -2,77 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Quest_Giver : MonoBehaviour
-{
-
-    [SerializeField] private GameObject questGiverText;
-
-    //Byta sprite när kistan är nära player
-    [SerializeField] private Sprite ChestClosed;
-    [SerializeField] private Sprite ChestOpen;
-
-    [SerializeField] private Text textComponent;
-
-    [SerializeField] private int amountToCollect = 1;
-    [SerializeField] private string questBeginText;
-    [SerializeField] private string questCompleteText;
+{   
+    [SerializeField] private int amountToCollect;
     [SerializeField] private GameObject houseToAppearWhenQuestIsComplete;
-
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip questGiverClip;
 
-    //[SerializeField] public bool isQuestComplete = false;
-
+    PlayerState playerState;
+    public GameObject mentorCanvas, enterPrompt;
+    public TextMeshProUGUI questText, nameText;
+    public Transform checkpoint, player, mentor;
+    private bool promptBool = false;
     void Start()
     {
-        questGiverText.SetActive(false);
-        textComponent.text = questBeginText;
-
-
-
+        questText.GetComponent<TextMeshProUGUI>().enabled = true;
+        playerState = GameObject.Find("Player").GetComponent<PlayerState>();
     }
 
+    void Update(){
+        MentorCheck();
+    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //byta till sprite för öppen kista
-        gameObject.GetComponent<SpriteRenderer>().sprite = ChestOpen;
-        
-        questGiverText.SetActive(true);
-        if (collision.CompareTag("Player") == true) 
-        {
-            if (collision.GetComponent<PlayerState>().starAmount >= amountToCollect)
+    void MentorCheck(){
+        if(Vector2.Distance(player.position, checkpoint.position)<5f){
+            mentorCanvas.SetActive(true);
+
+            questText.text = "You've reached a checkpoint! This means that if you die you will respawn here. \n\nThere's an enemy ahead, you can kill it by jumping on it.";
+        }
+        else if(Vector2.Distance(player.position, mentor.position)<5f){
+            mentorCanvas.SetActive(true);
+
+            if (playerState.starAmount >= amountToCollect)
             {
-                textComponent.text = questCompleteText;
                 Quest_Player.isQuestComplete = true;
                 houseToAppearWhenQuestIsComplete.SetActive(true);
+                questText.text = "You've already collected " + amountToCollect + " stars? That was quick! \n\nSorry but I may ask another favour of you later, you can go rest in the house for now.";
             }
-
             else
             {
-                textComponent.text = questBeginText;
+                if(promptBool == false){
+                    enterPrompt.SetActive(true);
+                    promptBool = true;
+                }
+
+                if(Input.GetKeyDown("return")){
+                    enterPrompt.SetActive(false);
+                    questText.text = "I have a little mission for you, could you go and collect " + amountToCollect + " stars? \n\nPlease, return here after you've collected " + amountToCollect + " stars.";
+                    nameText.text = "Fox the Mentor";
+                }
+                else if(enterPrompt.activeSelf == true){
+                    promptBool = false;
+                    questText.text = "Hello there! I'm Fox and I'm going to be your mentor. \n\nIn order to move around and climb ladders use WASD or the Arrow Keys. \n\nUse SPACE to jump.";
+                    nameText.text = "Fox";
+                }
             }
 
-           
-            //byta till sprite för öppen kista
-            gameObject.GetComponent<SpriteRenderer>().sprite = ChestOpen;
             audioSource.PlayOneShot(questGiverClip);
-       
+        }
+        else{
+            mentorCanvas.SetActive(false);
+            enterPrompt.SetActive(false);
         }
     }
-
-    private void OnTriggerExit2D(Collider2D collision) 
-    {
-        if (collision.CompareTag("Player") == true)
-        {
-            questGiverText.SetActive(false);
-            gameObject.GetComponent<SpriteRenderer>().sprite = ChestClosed;
-        }
-
-    }
-
-
-
 }
 

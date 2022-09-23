@@ -20,7 +20,7 @@ public class Quest_DoorToNextLevel : MonoBehaviour
             if (Quest_Player.isQuestComplete == true) {
                 GameObserver.SaveStarsToMemory(collision.GetComponent <PlayerState>().starAmount);
                 audioSource.PlayOneShot(levelClearedClip);
-                SceneManager.LoadScene(levelToLoad);
+                SceneManager.LoadScene("Level02");
 
             }
         }
