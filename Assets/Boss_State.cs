@@ -12,6 +12,7 @@ public class Boss_State : MonoBehaviour
     [SerializeField] new ParticleSystem particleSystem;
     [SerializeField] AudioClip deathclip;
     [SerializeField] AudioClip deatheffect;
+    
     [SerializeField] AudioSource audioSource;
     public float timeBetweenShots = 2;
     public Transform player, shootPos;
@@ -30,6 +31,9 @@ public class Boss_State : MonoBehaviour
     bool hasparticlesbeenplayed;
     BossFightBegin_SoundEffect BossEntranceSound;
     ParticleSystem BossSpawnParticles;
+    bool attack;
+    Winningmusic WinningmusicScript;
+
     private void Start()
     {
         spriteRenderer.enabled = false;
@@ -41,12 +45,14 @@ public class Boss_State : MonoBehaviour
         BossAlwaysParticles = GameObject.Find("BossAlwaysParticles").GetComponent<ParticleSystem>();
         BossEntranceSound = GameObject.Find("BossFightBeginEffect").GetComponent<BossFightBegin_SoundEffect>();
         BossSpawnParticles  = GameObject.Find("BossSpawnParticles").GetComponent<ParticleSystem>();
+        WinningmusicScript = GameObject.Find("Winningmusic").GetComponent<Winningmusic>();
     }
 
 
     private void Update()
     {
-        print(BossSpawn.BossIsDead);
+        
+        animator.SetBool("attack", attack);
         animator.SetBool("isDead", isDead);
       distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
@@ -60,16 +66,20 @@ public class Boss_State : MonoBehaviour
 
         if (Player.killedPlant >= 3)
         {
+            canShoot = false;
             isDead = true;
             if (hasMusicPlayed == false)
             {
+                BossEntranceSound.StopMusic();  
                 PlayDeathSoundEffects();
                 Invoke("DisableSprite", 0.5f);
-               
+                WinningmusicScript.PlayMusic();
+           
+
             }
-            BossEntrance.StopMusic();
+            
             BossSpawn.BossIsDead = true;
-            Invoke("DestroyBoss", 5f);
+            DisableSprite();
 
         }
 
@@ -87,11 +97,23 @@ public class Boss_State : MonoBehaviour
 
 
         }
-       
+        if (canShoot == true)
+        {
+            Invoke("DoAttackAnimation", 1f);
+            attack = false;
+        }
+       if (canShoot == false)
+        {
+            attack = false;
+        }
+
     }
 
     
-    
+  void DoAttackAnimation()
+    {
+        attack = true;
+    }
 
     
 
@@ -99,12 +121,13 @@ public class Boss_State : MonoBehaviour
     {
         if (spriteRenderer.enabled == true)
         {
+           
             var r = 1f;
             if (lastPlayerPosition != player.position)
             {
                 Random.Range(0f, 2);
             }
-
+           
             canShoot = false;
             yield return new WaitForSeconds(timeBetweenShots);
             GameObject newFireball = Instantiate(fireBall, shootPos.position, Quaternion.identity);
@@ -113,16 +136,14 @@ public class Boss_State : MonoBehaviour
             lastPlayerPosition = player.position;
 
             canShoot = true;
+           
         }
 
     }
 
 
 
-    private void DestroyBoss()
-    {
-        Destroy(gameObject);
-    }
+  
     private void EnableParticles()
     {
         particleSystem.Play();

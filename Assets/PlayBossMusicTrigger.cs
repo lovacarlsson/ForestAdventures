@@ -43,5 +43,8 @@ public class PlayBossMusicTrigger : MonoBehaviour
 
     }
 
-
+    public void DestroyGameObject()
+    {
+        Destroy(gameObject);    
+    }
 }

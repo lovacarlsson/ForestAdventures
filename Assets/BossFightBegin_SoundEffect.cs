@@ -33,7 +33,10 @@ public class BossFightBegin_SoundEffect : MonoBehaviour
         audioSource.PlayOneShot(growingClip);
 
     }
-
+    public void StopMusic ()
+    {
+        audioSource.Stop();
+    }
 
     /* private void SpawnBoss()
     {
