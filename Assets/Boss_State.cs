@@ -55,8 +55,8 @@ public class Boss_State : MonoBehaviour
     private void Update()
     {
         
-        animator.SetBool("attack", attack);
-        animator.SetBool("isDead", isDead);
+        //animator.SetBool("attack", attack);
+        //animator.SetBool("isDead", isDead);
       distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         if (distanceToPlayer <= range)
