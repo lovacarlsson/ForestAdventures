@@ -7434,6 +7434,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1111404904330305002, guid: 84a60f0860d9bb6409efeb5e0dd375b4, type: 3}
   m_PrefabInstance: {fileID: 1111404905329319833}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1282354500 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3449122998181020061, guid: 0860b35a78f777940b9b88cdfb707e62, type: 3}
+  m_PrefabInstance: {fileID: 1158618161}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1334396128
 GameObject:
   m_ObjectHideFlags: 0
@@ -34780,6 +34785,10 @@ PrefabInstance:
       propertyPath: amountToCollect
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6369250974997469309, guid: dea93744e892faf4cbb7d5f3c4640392, type: 3}
+      propertyPath: secondCheckpoint
+      value: 
+      objectReference: {fileID: 1282354500}
     - target: {fileID: 6369250974997469309, guid: dea93744e892faf4cbb7d5f3c4640392, type: 3}
       propertyPath: mentorCanvasTransform
       value: 

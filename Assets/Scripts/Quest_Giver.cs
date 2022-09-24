@@ -13,6 +13,8 @@ public class Quest_Giver : MonoBehaviour
 
     PlayerState playerState;
     public GameObject mentorCanvas, enterPrompt;
+    public Image mentorIcon;
+    public Sprite shocked, calm;
     public TextMeshProUGUI questText, nameText;
     public Transform checkpoint, player, mentor, powerUp, secondCheckpoint, mentorCanvasTransform;
     private bool promptBool = false;
@@ -49,7 +51,8 @@ public class Quest_Giver : MonoBehaviour
             {
                 Quest_Player.isQuestComplete = true;
                 houseToAppearWhenQuestIsComplete.SetActive(true);
-                questText.text = "You've already collected " + amountToCollect + " stars? That was quick! \n\nSorry but I may ask another favour of you later, you can go rest in the house for now.";
+                mentorIcon.sprite = shocked;
+                questText.text = "You've already collected " + amountToCollect + " stars!? That was quick! \n\nSorry but I may ask another favour of you later, you can go rest in the house for now.";
             }
             else
             {
@@ -80,7 +83,7 @@ public class Quest_Giver : MonoBehaviour
         else if(Vector2.Distance(player.position, secondCheckpoint.position)<5f){
             if(beeBool == false){
                 mentorCanvas.SetActive(true);
-                questText.text = "You may have noticed that upon killing an enemy you get a little boost. \n\nTry using that boost to your advantage to traverse this chasm.";
+                questText.text = "You may have noticed that upon killing an enemy you get a little boost. \n\nTry using that boost to your advantage to traverse this chasm.s";
                 beeBool = true;
             }
         }
@@ -88,6 +91,7 @@ public class Quest_Giver : MonoBehaviour
             mentorCanvas.SetActive(false);
             enterPrompt.SetActive(false);
             mentorCanvasTransform.transform.position = originalPos;
+            mentorIcon.sprite = calm;
         }
     }
 }
