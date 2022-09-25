@@ -15,7 +15,7 @@ public class Quest_Giver : MonoBehaviour
     public GameObject mentorCanvas, enterPrompt;
     public Image mentorIcon;
     public Sprite shocked, calm;
-    public TextMeshProUGUI questText, nameText;
+    public TextMeshProUGUI questText;
     public Transform checkpoint, player, mentor, powerUp, secondCheckpoint, mentorCanvasTransform;
     private bool promptBool = false;
     private bool checkpointBool = false;
