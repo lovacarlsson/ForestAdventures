@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7137777366358886961}
   - component: {fileID: 7137777366358886966}
   - component: {fileID: 7137777366358886967}
-  - component: {fileID: 452541905358823277}
   - component: {fileID: 5562250220904140319}
+  - component: {fileID: 5892024851849066019}
   m_Layer: 0
   m_Name: Fireball
   m_TagString: Untagged
@@ -28,14 +28,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7137777366358886963}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 42, y: -21.523148, z: 0}
-  m_LocalScale: {x: 1.15, y: 1.15, z: 1}
+  m_LocalRotation: {x: -0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 41.58, y: -21.478, z: -0.077}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -50, y: 0, z: 0}
 --- !u!212 &7137777366358886961
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -77,9 +77,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a3917d9ddd18744a69be8a1b1a3eaa88, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8a750122a907c7c4d87ce477ac70da04, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 4, y: 4}
@@ -122,46 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dieTime: 2
---- !u!60 &452541905358823277
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7137777366358886963}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.0625, y: 1.1875}
-    newSize: {x: 4, y: 4}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.31538638, y: 0.43523613}
-      - {x: 0.15152168, y: 0.46935186}
-      - {x: 0.10162625, y: 0.4110704}
-      - {x: 0.04065251, y: 0.3944056}
-      - {x: 0.124071226, y: 0.2406889}
-      - {x: -0.15926662, y: -0.00075209886}
-      - {x: -0.35431194, y: -0.29294646}
-      - {x: -0.35851932, y: -0.41064748}
-      - {x: -0.18082947, y: -0.40091234}
-      - {x: -0.08570349, y: -0.31451583}
-      - {x: 0.07630001, y: -0.1233426}
-      - {x: 0.14996395, y: -0.036031928}
-      - {x: 0.19243039, y: 0.24758787}
-      - {x: 0.4132251, y: 0.21674024}
-      - {x: 0.5097927, y: 0.26548013}
 --- !u!96 &5562250220904140319
 TrailRenderer:
   serializedVersion: 2
@@ -183,7 +143,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -204,7 +164,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 5
+  m_Time: 0.2
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -225,8 +185,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.9056604, g: 0.7903168, b: 0.80294806, a: 1}
-      key1: {r: 0.9314226, g: 0.9433962, b: 0.734247, a: 1}
+      key0: {r: 0.9725491, g: 0.30980393, b: 0, a: 0.6901961}
+      key1: {r: 0.9339623, g: 0.8697771, b: 0, a: 0.24313726}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -261,3 +221,37 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!60 &5892024851849066019
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137777366358886963}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 4}
+    newSize: {x: 4, y: 4}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -1.5223618, y: 0.5227976}
+      - {x: -1.5, y: 0}
+      - {x: -1.5131912, y: -0.6873623}
+      - {x: -1.1364517, y: -0.71720964}
+      - {x: -0.31811523, y: -0.7197658}
+      - {x: -0.0022659302, y: -0.7471714}
+      - {x: 0.8298187, y: -0.083485976}
+      - {x: 0.57987976, y: 0.040464878}
+      - {x: -0.06774902, y: 0.5051124}
