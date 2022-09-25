@@ -74,7 +74,7 @@ public class PlantScript : MonoBehaviour
             isAlive = false;
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             Player.JumpCall();
-            audioSource.PlayOneShot(deathclip); 
+            //audioSource.PlayOneShot(deathclip); 
             Invoke("DestroyEnemy", 0.25f);
         }
     }
