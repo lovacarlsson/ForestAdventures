@@ -6,7 +6,7 @@ TagManager:
   tags:
   - EnemyAlien
   - Enemy
-  - FirstCheck
+  - Underling
   layers:
   - Default
   - TransparentFX
