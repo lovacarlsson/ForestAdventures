@@ -13,6 +13,7 @@ using Random = UnityEngine.Random;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public int killedPlant;
     // Rigidbody2D referens
     private Rigidbody2D rigidbod;
 
@@ -48,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
    
 
     //Boolean f�r sprite renderer (facing right)?
-    private bool isfacingLeft = false;
+    public bool isfacingLeft = false;
 
     //Velocity
     private Vector3 velocity;
@@ -248,6 +249,13 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Underling")
+        {
+            killedPlant++;
+        }
+    }
 }
 
 
