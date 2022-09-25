@@ -6,27 +6,30 @@ using UnityEngine.UI;
 public class UI_PlayerHP : MonoBehaviour
 {
     public PlayerState playerState;
-    private Slider slider;
 
-    int maxplayerHealthPoints;
-
-   
-    
+    public Image hp;
+     
+    public Sprite hpHigh, hpMid, hpLow;
     void Start()
     {
-        maxplayerHealthPoints = playerState.initalHealthPoints;
-        slider = GetComponent<Slider>();
-        slider.wholeNumbers = true;
-        slider.maxValue = maxplayerHealthPoints;
-
+        
     }
 
     
     void Update()
     {
-        slider.value = playerState.healthpoints;
+        ChangeHP();
+    }
 
-
-
+    private void ChangeHP(){
+        if(playerState.healthpoints == 3){
+            hp.sprite = hpHigh;
+        }
+        if(playerState.healthpoints == 2){
+            hp.sprite = hpMid;
+        }
+        if(playerState.healthpoints == 1){
+            hp.sprite = hpLow;
+        }
     }
 }
