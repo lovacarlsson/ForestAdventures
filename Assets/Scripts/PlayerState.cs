@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerState : MonoBehaviour
 {
-    public int healthpoints = 2;
-    public int initalHealthPoints = 2;
+    public int healthpoints = 3;
+    public int initalHealthPoints = 3;
 
     
     public int starAmount = 0;
@@ -68,7 +68,7 @@ public class PlayerState : MonoBehaviour
     }
 
 
-    //Försök till att stänga av animationen när spelaren dör men vet inte hur jag ska referera till boolean i detta skript.
+    //Fï¿½rsï¿½k till att stï¿½nga av animationen nï¿½r spelaren dï¿½r men vet inte hur jag ska referera till boolean i detta skript.
     public void StopDeathAnimation (Collider2D collision) 
     
     {
