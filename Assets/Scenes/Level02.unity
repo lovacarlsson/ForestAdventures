@@ -7262,7 +7262,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.58, y: 4.17, z: -10.45}
+  m_LocalPosition: {x: 15.56, y: 4.92, z: -10.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7284,7 +7284,7 @@ MonoBehaviour:
   player: {fileID: 389834619}
   timeOffset: 1
   leftLimit: -3.02
-  rightLimit: 218.6
+  rightLimit: 216.95
   bottomLimit: -39.4
   topLimit: 15
   posOffset: {x: 1, y: 1}
@@ -8122,6 +8122,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8778522838775059353, guid: b03a7e02144de02758f0a8690735c0d2, type: 3}
   m_PrefabInstance: {fileID: 1223267756}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &679962969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679962959}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5300d23d0e6d3184fb371d8471cef316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountToCollect: 8
+  houseToAppearWhenQuestIsComplete: {fileID: 0}
+  audioSource: {fileID: 0}
+  questGiverClip: {fileID: 0}
+  mentorCanvas: {fileID: 0}
+  enterPrompt: {fileID: 0}
+  mentorIcon: {fileID: 0}
+  shocked: {fileID: 0}
+  calm: {fileID: 0}
+  questText: {fileID: 0}
+  checkpoint: {fileID: 0}
+  player: {fileID: 0}
+  mentor: {fileID: 0}
+  powerUp: {fileID: 0}
+  secondCheckpoint: {fileID: 0}
 --- !u!1 &710904800
 GameObject:
   m_ObjectHideFlags: 0
@@ -141345,7 +141372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1111404904330305002, guid: 84a60f0860d9bb6409efeb5e0dd375b4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.19
+      value: 9.22
       objectReference: {fileID: 0}
     - target: {fileID: 1111404904330305002, guid: 84a60f0860d9bb6409efeb5e0dd375b4, type: 3}
       propertyPath: m_LocalPosition.y

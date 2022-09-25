@@ -6,7 +6,7 @@ using TMPro;
 
 public class Quest_Giver : MonoBehaviour
 {   
-    [SerializeField] private int amountToCollect;
+    public int amountToCollect;
     [SerializeField] private GameObject houseToAppearWhenQuestIsComplete;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip questGiverClip;
@@ -16,7 +16,7 @@ public class Quest_Giver : MonoBehaviour
     public Image mentorIcon;
     public Sprite shocked, calm;
     public TextMeshProUGUI questText;
-    public Transform checkpoint, player, mentor, powerUp, secondCheckpoint, mentorCanvasTransform;
+    public Transform checkpoint, player, mentor, powerUp, secondCheckpoint;
     private bool promptBool = false;
     private bool checkpointBool = false;
     private bool powerUpBool = false;
@@ -26,7 +26,7 @@ public class Quest_Giver : MonoBehaviour
     {
         questText.GetComponent<TextMeshProUGUI>().enabled = true;
         playerState = GameObject.Find("Player").GetComponent<PlayerState>();
-        originalPos = mentorCanvasTransform.transform.position;
+        originalPos = mentorCanvas.transform.position;
     }
 
     void Update(){
@@ -67,6 +67,7 @@ public class Quest_Giver : MonoBehaviour
                 }
                 else if(enterPrompt.activeSelf == true){
                     questText.text = "Hello there! I'm Fox and I'm going to be your mentor. \n\nIn order to move around and climb ladders use WASD or the Arrow Keys. \n\nUse SPACE to jump.";
+                    //audioSource.PlayOneShot(questGiverClip);
                     promptBool = false;
                 }
             }
@@ -74,24 +75,24 @@ public class Quest_Giver : MonoBehaviour
         else if(Vector2.Distance(player.position, powerUp.position)<7.5f){
             if(powerUpBool == false){
                 mentorCanvas.SetActive(true);
-                mentorCanvasTransform.transform.position = new Vector3(525f, 300f);
+                mentorCanvas.transform.localPosition = new Vector3(-1.7744751f,0f,0f);
                 questText.text = "See that thing? That's a power up. \n\nPower ups are temporary buffs that can help you, for example, traverse otherwise untraversable terrain";
-
                 powerUpBool = true;
             }
         }
         else if(Vector2.Distance(player.position, secondCheckpoint.position)<5f){
             if(beeBool == false){
                 mentorCanvas.SetActive(true);
-                questText.text = "You may have noticed that upon killing an enemy you get a little boost. \n\nTry using that boost to your advantage to traverse this chasm.s";
+                questText.text = "You may have noticed that upon killing an enemy you get a little boost. \n\nTry using that boost to your advantage to traverse this chasm.";
                 beeBool = true;
             }
         }
         else{
             mentorCanvas.SetActive(false);
             enterPrompt.SetActive(false);
-            mentorCanvasTransform.transform.position = originalPos;
+            mentorCanvas.transform.position = originalPos;
             mentorIcon.sprite = calm;
+            questText.text = "Have you already collected " + amountToCollect + "? No? Then what are doing here, those stars won't collect themselves!";
         }
     }
 }
