@@ -15,14 +15,8 @@ public class Quest_DoorToNextLevel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") == true)
-        {
-            if (Quest_Player.isQuestComplete == true) {
                 GameObserver.SaveStarsToMemory(collision.GetComponent <PlayerState>().starAmount);
                 audioSource.PlayOneShot(levelClearedClip);
-                SceneManager.LoadScene("Level02");
-
-            }
-        }
+                SceneManager.LoadScene("Level03");
     }
 }
