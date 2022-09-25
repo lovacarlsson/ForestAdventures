@@ -8,6 +8,7 @@ public class PlayerCheckPoint : MonoBehaviour
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip checkpointClip;
+    bool hasClipPlayed;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") == true)
@@ -15,9 +16,12 @@ public class PlayerCheckPoint : MonoBehaviour
             collision.GetComponent<PlayerState>().ChangeRespawnPosition(gameObject);
 
             gameObject.GetComponent<SpriteRenderer>().sprite = CheckPointTaken;
-
-            //jag ville inte längre ha ett ljud : )
-            //audioSource.PlayOneShot(checkpointClip);
+            if (hasClipPlayed == false)
+            {
+                audioSource.PlayOneShot(checkpointClip);
+                hasClipPlayed = true;
+            }
+            
         }
     }
 }
