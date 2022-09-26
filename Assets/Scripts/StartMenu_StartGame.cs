@@ -21,6 +21,7 @@ public class StartMenu_StartGame : MonoBehaviour
     public void StartGameDelay ()
     {
         SceneManager.LoadScene(1);
+        print(Screen.currentResolution);
 
     }
 

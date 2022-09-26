@@ -45542,6 +45542,14 @@ PrefabInstance:
       propertyPath: playerState
       value: 
       objectReference: {fileID: 389834625}
+    - target: {fileID: 9144961645486218357, guid: 523cf2e121be1529f832deabeccbb612, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -717
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144961645486218357, guid: 523cf2e121be1529f832deabeccbb612, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 491
+      objectReference: {fileID: 0}
     - target: {fileID: 9144961645980094386, guid: 523cf2e121be1529f832deabeccbb612, type: 3}
       propertyPath: m_IsActive
       value: 0
